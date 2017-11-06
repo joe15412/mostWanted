@@ -30,7 +30,9 @@ function searchByTraits(people) {
     case "weight":
       filteredPeople = searchByWeight(people);
       break;
-    // so on and so forth
+    case "age":
+	  filteredPeople = searchByAge(people);
+	  break;
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -139,11 +141,35 @@ function chars(input){
   return true; // default validation only
 }
 
+function integerValidation(response){
+	
+	if(!Number.isInteger(response)){
+		alert("please enter an integer.");
+		return false;
+	}
+	
+	return true;
+}
+function searchByAge(people){
+	
+	let dobGoal = prompt("What is the person's date of birth (format d/m/y)");
+	let peopleWithinCriteria = [];
+	
+	for(let i=0; i<people.length; i++){
+		if(dobGoal===people[i].dob){
+			peopleWithinCriteria.push(people[i]);
+		}
+	}
+	
+	return peopleWithinCriteria;
+}
+
 function getAge(dateOfBirth){
   
   let dob = new Date(dateOfBirth);
   let currentDate = new Date();
-  
+ 
   return currentDate.getFullYear() - dob.getFullYear();
-}
+
+ }
 
