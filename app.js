@@ -1,7 +1,6 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
-
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -129,3 +128,12 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function getAge(dateOfBirth){
+	
+	let dob = new Date(dateOfBirth);
+	let currentDate = new Date();
+	
+	return currentDate.getFullYear() - dob.getFullYear();
+}
+
