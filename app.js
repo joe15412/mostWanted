@@ -1,6 +1,7 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
+
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -74,8 +75,8 @@ function mainMenu(person, people){
     case "family":
     // TODO: get person's family
     break;
-    case "descendants":
-    // TODO: get person's descendants
+    case "descendants": // TODO: get person's descendants
+      displayPeople(people);
     break;
     case "restart":
     app(people); // restart
@@ -95,18 +96,27 @@ function searchByName(people){
 
 }
 
+
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
+
+    
+
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+
+// user needs list of their full names, descendants are limited 'by blood' (use recursion)
 
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  
+  
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
@@ -130,10 +140,10 @@ function chars(input){
 }
 
 function getAge(dateOfBirth){
-	
-	let dob = new Date(dateOfBirth);
-	let currentDate = new Date();
-	
-	return currentDate.getFullYear() - dob.getFullYear();
+  
+  let dob = new Date(dateOfBirth);
+  let currentDate = new Date();
+  
+  return currentDate.getFullYear() - dob.getFullYear();
 }
 
