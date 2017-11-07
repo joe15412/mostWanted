@@ -21,12 +21,12 @@ function app(people){
 
 function searchByTraits(people) {
   let filteredPeople = people;
-  let continueSearch = false;
+  let continueSearch = true;
   let traits = createTraitsArray();
 
 
   while (continueSearch===true){
-	let userSearchChoice =  return prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+	let userSearchChoice =  prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
 	switch(userSearchChoice) {
 		case "height":
 			filteredPeople = searchByHeight(filteredPeople);
@@ -64,6 +64,40 @@ function searchByTraits(people) {
 	mainMenu(foundPerson, people);
 }
 
+// Menu function to call once you find who you are looking for
+function mainMenu(person, people){
+
+  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+
+  if(!person){
+    alert("Could not find that individual.");
+    return app(people); // restart
+  }
+
+  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+
+  switch(displayOption){
+    case "info":
+		displayPerson(person);
+		break;
+	case "family":
+		displayFamily(person,people);
+		break;
+    case "descendants":
+		descendants = getDescendants(people,person);
+		alert(descendants);
+		break;
+	case "restart":
+		app(people); // restart
+		break;
+    case "quit":
+		return; // stop execution
+    default:
+		return mainMenu(person, people); // ask again
+  }
+}
+
+
 function createTraitsArray(){
 	let traits = [
 		{
@@ -93,6 +127,7 @@ function createTraitsArray(){
 
 	return traits;
 }
+
 function getUserSearchChoice(heightSearched,weightSearched,eyeColorSearched,genderSearched,ageSearched,occupationSearched){
 	
  let searchString = "What would you like to search by?";
@@ -117,7 +152,7 @@ function getUserSearchChoice(heightSearched,weightSearched,eyeColorSearched,gend
 	
 }
 function searchAgain(length){
-	let continueSearch = promptFor("We have found "+ length +" People with that trait. Would you like to search using another trait? Type 'yes' to search again or 'no' to continue", yesNo).toLowerCase();
+	let continueSearch = 
 	
 	if(continueSearch === 'yes'){
 		return true;
@@ -176,6 +211,31 @@ function searchByAge(people){
 	return peopleWithinCriteria;
 }
 
+function getDescendants(people,person){
+
+	if(person === undefined){
+		return "";
+	}
+	
+	let personId= person.id;
+	let descendantString = "";
+	
+	let descendants = people.filter( function (el){
+		for(let i=0;i<el.parents.length;i++){
+			if(el.parents[i] === personId){
+				descendantString += el.firstName+ " "+ el.lastName + "\n";
+				return true;
+			}
+		}
+	});
+
+	for(let i=0;i<descendants.length;i++){
+		descendantString += getDescendants(people,descendants[i]);
+	}
+	
+	return descendantString;
+}
+
 function getAge(dateOfBirth){
   
   let dob = new Date(dateOfBirth);
@@ -191,38 +251,6 @@ function getAge(dateOfBirth){
   }
   
   return currentDate.getFullYear()- dob.getFullYear() -1;
-}
-
-// Menu function to call once you find who you are looking for
-function mainMenu(person, people){
-
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
-  if(!person){
-    alert("Could not find that individual.");
-    return app(people); // restart
-  }
-
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-
-  switch(displayOption){
-    case "info":
-		displayPerson(person);
-		break;
-	case "family":
-		displayFamily(person,people);
-		break;
-    case "descendants": // TODO: get person's descendants
-		displayPeople(people);
-		break;
-	case "restart":
-		app(people); // restart
-		break;
-    case "quit":
-		return; // stop execution
-    default:
-		return mainMenu(person, people); // ask again
-  }
 }
 
 function searchByName(people){
