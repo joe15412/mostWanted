@@ -228,7 +228,7 @@ function getParents(person, people){
 
   for(let i=0;i < people.length; i++){
   	for(let j=0;j < people[i].parents.length; j++){
-  	  if(people[i].parents[j] === personID){
+  	  if(people[i].parents[j]){
   		  parentsString += people[i].firstName + " " + people[i].lastName + "\n";
   		  return parentsString;
   	  }
@@ -239,7 +239,7 @@ function getParents(person, people){
 function getChildren(person, people){
   let personID = person.id;
   let childrenString = "";
-  
+
 }
 
 function getSiblings(person, people){
