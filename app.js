@@ -214,10 +214,13 @@ function getSpouse(person, people){
   let personID = person.id;
   let spouseString = "";
 
-  for(let i=0;i < people.length; i++){
+  for(let i=0; i < people.length; i++){
   	if(personID === people[i].currentSpouse){
   		spouseString += people[i].firstName + " " + people[i].lastName + "\n";
   		return spouseString;
+  	}
+  	else{
+  		return spouseString += "There is no spouse." + "\n";
   	}
   }
 }
@@ -225,12 +228,17 @@ function getSpouse(person, people){
 function getParents(person, people){
   let personID = person.id;
   let parentsString = "";
+  let parent = [];
 
-  for(let i=0;i < people.length; i++){
-  	for(let j=0;j < people[i].parents.length; j++){
+  parentsString = parent;
+  for(let i=0; i < people.length; i++){
+  	for(let j=0; j < people[i].parents.length; j++){
   	  if(people[i].parents[j]){
-  		  parentsString += people[i].firstName + " " + people[i].lastName + "\n";
+  		  parent += people[i].firstName + " " + people[i].lastName + "\n";
   		  return parentsString;
+  	  }
+  	  else{
+  	  	return parentsString += "There are no parents." + "\n";
   	  }
     }
   }
@@ -240,6 +248,13 @@ function getChildren(person, people){
   let personID = person.id;
   let childrenString = "";
 
+  // for(let i=0;i < people.length; i++){
+  // 	for(let j=0;j < people[i].parents.length; j++){
+  // 	  if(people[i].parents[j] === personID){
+
+  // 	  }
+  //   }
+  // }
 }
 
 function getSiblings(person, people){
