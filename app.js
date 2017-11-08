@@ -79,7 +79,8 @@ function mainMenu(person, people){
 		displayPerson(person);
 		break;
 	case "family":
-		displayFamily(person,people);
+		family = displayFamily(person,people);
+		alert(family);
 		break;
     case "descendants":
 		descendants = getDescendants(people,person);
@@ -206,7 +207,7 @@ function searchByName(people){
 }
 
 //parents, spouse, siblings and children
-function displayFamily(person,people){
+function displayFamily(person, people){
   let personID = person.id;
   let familyString = "";
 
@@ -217,6 +218,7 @@ function displayFamily(person,people){
   	if(people[i].parents[i] === personID){
   		familyString += "Parent(s): " + people.firstName + "" + people.lastName + "\n";
   	}
+
   }
   return familyString;
 }
