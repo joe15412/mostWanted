@@ -152,7 +152,7 @@ function getUserSearchChoice(heightSearched,weightSearched,eyeColorSearched,gend
 	
 }
 function searchAgain(length){
-	let continueSearch = 
+	let continueSearch;
 	
 	if(continueSearch === 'yes'){
 		return true;
@@ -261,11 +261,22 @@ function searchByName(people){
 
 }
 
+//parents, spouse, siblings and children
 function displayFamily(person,people){
-	
-	let family = [];
-		
+  let personID = person.id;
+  let familyString = "";
+
+  for(let i=0;i < people.length; i++){
+  	if(people[i].currentSpouse === personID){
+  		familyString += "Spouse: " + people.firstName + "" + people.lastName + "\n";
+  	}
+  	if(people[i].parents[i] === personID){
+  		familyString += "Parent(s): " + people.firstName + "" + people.lastName + "\n";
+  	}
+  }
+  return familyString;
 }
+
 
 // alerts a list of people
 function displayPeople(people){
