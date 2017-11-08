@@ -219,28 +219,25 @@ function getSpouse(person, people){
   		spouseString += people[i].firstName + " " + people[i].lastName + "\n";
   		return spouseString;
   	}
-  	else{
-  		return spouseString += "There is no spouse." + "\n";
-  	}
   }
 }
 
 function getParents(person, people){
-  let personID = person.id;
+  let parentsID = person.parents;
   let parentsString = "";
-  let parent = [];
+  let parentArray = [];
 
-  parentsString = parent;
+  parentArray = parentsID
+  let parentOneid = parentArray[0];
+  let parentTwoid = parentArray[1];
   for(let i=0; i < people.length; i++){
-  	for(let j=0; j < people[i].parents.length; j++){
-  	  if(people[i].parents[j]){
-  		  parent += people[i].firstName + " " + people[i].lastName + "\n";
-  		  return parentsString;
-  	  }
-  	  else{
-  	  	return parentsString += "There are no parents." + "\n";
-  	  }
-    }
+  	if(parentOneid === people[i].id){
+  		parentsString += people[i].firstName + " " + people[i].lastName + "\n";
+  	}
+  	if(parentTwoid === people[i].id){
+  		parentsString += people[i].firstName + " " + people[i].lastName + "\n";
+  		return parentsString;
+  	}
   }
 }
 
@@ -248,19 +245,21 @@ function getChildren(person, people){
   let personID = person.id;
   let childrenString = "";
 
-  // for(let i=0;i < people.length; i++){
-  // 	for(let j=0;j < people[i].parents.length; j++){
-  // 	  if(people[i].parents[j] === personID){
-
-  // 	  }
-  //   }
-  // }
 }
 
+//need to have the same parents
 function getSiblings(person, people){
-  let personID = person.id;
+  let parentsID = person.parents;
   let siblingsString = "";
+  let parentArray = [];
+  let siblings = [];
 
+  parentArray = parentsID
+  for(let i=0; i < people.length; i++){
+  	if(parentArray === people[i].parent){
+  		siblingString += people[i].firstName + " " + people[i].lastName + "\n";
+  	}
+  }  
 }
 
 // alerts a list of people
