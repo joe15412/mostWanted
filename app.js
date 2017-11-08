@@ -22,8 +22,6 @@ function app(people){
 function searchByTraits(people) {
   let filteredPeople = people;
   let continueSearch = true;
-  let traits = createTraitsArray();
-
 
   while (continueSearch===true){
 	let userSearchChoice =  prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
@@ -97,62 +95,8 @@ function mainMenu(person, people){
   }
 }
 
-
-function createTraitsArray(){
-	let traits = [
-		{
-		"trait":"height",
-		"searched":false
-		},
-		{
-		"trait":"weight",
-		"searched":false
-		},
-		{
-		"trait":"eye color",
-		"searched":false
-		},
-		{
-		"trait":"gender",
-		"searched":false
-		},
-		{
-		"trait":"age",
-		"searched":false
-		},
-		{
-		"trait":"occupation",
-		"searched":false
-		}];
-
-	return traits;
-}
-
-function getUserSearchChoice(heightSearched,weightSearched,eyeColorSearched,genderSearched,ageSearched,occupationSearched){
-	
- let searchString = "What would you like to search by?";
- 
- if(heightSearched===false){
-	searchString +="'height', ";
- }
- if(weightSearched===false){
-	searchString +="'weight', ";
- }
- if(eyeColorSearched===true){
-	searchString +="'eye color', ";
- }
- if(heightSearched===true){
-	searchString +="'height', ";
- }
- if(heightSearched===true){
-	searchString +="'height', ";
- }
- 
- return prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");	
-	
-}
 function searchAgain(length){
-	let continueSearch = 
+	let continueSearch = ("Would you like to continue your search.Type 'yes' to search again or 'no' to continue" , yesNo).toLowerCase();
 	
 	if(continueSearch === 'yes'){
 		return true;
@@ -283,7 +227,7 @@ function displayPerson(person){
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";  
-  personInfo += "Height: " + person.height + "in.\n";
+  personInfo += "Height: " + convertToFeetInches(person.height) + "\n";
   personInfo += "Weight: " + person.weight + "lbs.\n";
   personInfo += "Eye color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
@@ -308,3 +252,20 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+ function convertToFeetInches(heightInInches){
+	
+	let heightString = '';
+	
+	if(parseInt(heightInInches)%12===0){
+		let heightInFeet=parseInt(heightInInches)/12;
+		heightString += heightInFeet + "'";
+	}
+	else{
+		let remainder= heightInInches%12;
+		heightInInches -= remainder;
+		let heightInFeet=parseInt(heightInInches)/12;
+		heightString += heightInFeet + "'" + remainder + '"';		
+	}
+	
+	return heightString;
+ }
