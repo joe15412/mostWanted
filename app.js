@@ -79,8 +79,11 @@ function mainMenu(person, people){
 		displayPerson(person);
 		break;
 	case "family":
-		family = displayFamily(person,people);
-		alert(family);
+		spouse = getSpouse(person,people);
+		siblings = getSiblings(person, people);
+		parents = getParents(person, people);
+		children = getChildren(person, people);
+		alert("Spouse: " + spouse + "\n" + "Siblings: " + siblings + "\n" + "Parents: " + parents + "\n" + "Children: " + children);
 		break;
     case "descendants":
 		descendants = getDescendants(people,person);
@@ -207,22 +210,43 @@ function searchByName(people){
 }
 
 //parents, spouse, siblings and children
-function displayFamily(person, people){
+function getSpouse(person, people){
   let personID = person.id;
-  let familyString = "";
+  let spouseString = "";
 
   for(let i=0;i < people.length; i++){
-  	if(people[i].currentSpouse === personID){
-  		familyString += "Spouse: " + people.firstName + "" + people.lastName + "\n";
+  	if(personID === people[i].currentSpouse){
+  		spouseString += people[i].firstName + " " + people[i].lastName + "\n";
+  		return spouseString;
   	}
-  	if(people[i].parents[i] === personID){
-  		familyString += "Parent(s): " + people.firstName + "" + people.lastName + "\n";
-  	}
-
   }
-  return familyString;
 }
 
+function getParents(person, people){
+  let personID = person.id;
+  let parentsString = "";
+
+  for(let i=0;i < people.length; i++){
+  	for(let j=0;j < people[i].parents.length; j++){
+  	  if(people[i].parents[j] === personID){
+  		  parentsString += people[i].firstName + " " + people[i].lastName + "\n";
+  		  return parentsString;
+  	  }
+    }
+  }
+}
+
+function getChildren(person, people){
+  let personID = person.id;
+  let childrenString = "";
+  
+}
+
+function getSiblings(person, people){
+  let personID = person.id;
+  let siblingsString = "";
+
+}
 
 // alerts a list of people
 function displayPeople(people){
