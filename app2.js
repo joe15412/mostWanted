@@ -1,8 +1,3 @@
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
-
-// app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
@@ -15,7 +10,7 @@ function app(people){
 		break;
     default:
 		alert("Wrong! Please try again, following the instructions dummy. :)");
-		app(people); // restart app
+		app(people);
 		break;
   }
 }
@@ -62,14 +57,11 @@ function searchByTraits(people) {
 	mainMenu(foundPerson, people);
 }
 
-// Menu function to call once you find who you are looking for
 function mainMenu(person, people){
-
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(people);
   }
 
   var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",chars).toLowerCase();
@@ -86,12 +78,12 @@ function mainMenu(person, people){
 		alert(descendants);
 		break;
 	case "restart":
-		app(people); // restart
+		app(people);
 		break;
     case "quit":
-		return; // stop execution
+		return;
     default:
-		return mainMenu(person, people); // ask again
+		return mainMenu(person, people);
   }
 }
 
@@ -117,7 +109,6 @@ function searchByName(people){
     if(el.firstName.toLowerCase() === userInputFirstName && el.lastName.toLowerCase() === userInputLastName) {
       return true;
     }
-    // return true if el.height matches userInputHeight
   });
 
   return newArray;	
@@ -132,7 +123,6 @@ function searchByWeight(people) {
     if(el.weight == userInputWeight) {
       return true;
     }
-    // return true if el.height matches userInputHeight
   });
 
   return newArray;
@@ -392,7 +382,6 @@ function displaySiblings(siblings){
 	}
 }
 
-// alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
 	
@@ -400,11 +389,8 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-// user needs list of their full names, descendants are limited 'by blood' (use recursion)
-
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
+
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";  
@@ -416,7 +402,6 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-// function that prompts and validates user input
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
@@ -424,14 +409,12 @@ function promptFor(question, valid){
   return response;
 }
 
-// helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
-// helper function to pass in as default promptFor validation
 function chars(input){
-  return true; // default validation only
+  return true;
 }
 
 function isInteger(input){
