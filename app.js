@@ -80,9 +80,9 @@ function mainMenu(person, people){
 		break;
 	case "family":
 		spouse = getSpouse(person,people);
-		siblings = getSiblings(person, people);
 		parents = getParents(person, people);
 		children = getChildren(person, people);
+		siblings = getSiblings(person, people);		
 		alert("Spouse: " + spouse + "\n" + "Siblings: " + siblings + "\n" + "Parents: " + parents + "\n" + "Children: " + children);
 		break;
     case "descendants":
@@ -248,18 +248,11 @@ function getChildren(person, people){
 }
 
 //need to have the same parents
+//split parentIDs
+//put parentIDs against each to find matches
+//take first and last names of matches and put into a string
 function getSiblings(person, people){
-  let parentsID = person.parents;
-  let siblingsString = "";
-  let parentArray = [];
-  let siblings = [];
 
-  parentArray = parentsID
-  for(let i=0; i < people.length; i++){
-  	if(parentArray === people[i].parent){
-  		siblingString += people[i].firstName + " " + people[i].lastName + "\n";
-  	}
-  }  
 }
 
 // alerts a list of people
