@@ -193,7 +193,7 @@ function searchByAge(people){
 	
 	let peopleWithinCriteria = people.filter (function (el){
 	if (parseInt(ageGoal) === getAge(el.dob)){
-	return true;}[i]
+	return true;}
 	});
 	
 	return peopleWithinCriteria;
